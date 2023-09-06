@@ -1,0 +1,15 @@
+.table {
+	display: grid;
+	grid-template-rows: 50px repeat(3, 70px);
+	&__row {
+		display: grid;
+		grid-template-columns: repeat(4, 120px);
+		border: 1px solid black;
+		text-align: center;
+	}
+	&__col {
+		border: 1px solid black;
+		display: grid;
+		align-items: center;
+	}
+}

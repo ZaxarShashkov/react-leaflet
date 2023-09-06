@@ -1,0 +1,12 @@
+.App {
+	height: 100vh;
+	padding: 10px;
+}
+
+.wrapper {
+	display: grid;
+	grid-template-columns: 480px 1fr;
+	align-items: center;
+	height: 100vh;
+	gap: 5px;
+}
