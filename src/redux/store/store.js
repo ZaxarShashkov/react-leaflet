@@ -1,15 +1,23 @@
-import createSagaMiddleware from '@redux-saga/core';
+import createSagaMiddleware from 'redux-saga';
+import { takeEvery } from 'redux-saga/effects';
 import { configureStore } from '@reduxjs/toolkit';
-import coordReducer from '../CoordSlice/CoordSlice';
-import rootSaga from '../rootSaga/rootSaga';
+import coords, { GET_COORD, getCoordsSaga } from '../CoordSlice/CoordSlice';
 
 const sagaMiddleware = createSagaMiddleware();
 
+function* sagas() {
+	yield takeEvery(GET_COORD, getCoordsSaga);
+}
+
 const store = configureStore({
-	reducer: { coordReducer },
-	middleware: [sagaMiddleware],
+	devTools: true,
+	reducer: {
+		coords,
+	},
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({ thunk: false }).concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(rootSaga);
+sagaMiddleware.run(sagas);
 
 export default store;

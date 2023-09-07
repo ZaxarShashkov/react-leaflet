@@ -1,32 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAction, createSlice } from '@reduxjs/toolkit';
+import { put } from 'redux-saga/effects';
 
-const coordInitialState = {
-	coord: {
-		data: null,
-		isLoading: false,
-		error: '',
-	},
+const initialState = {
+	list: [],
 };
 
-export const coordSlice = createSlice({
+export const getCoordApi = () => {
+	return fetch(
+		'http://router.project-osrm.org/route/v1/car/30.29496392,59.84660399;30.42423701,59.82934196;30.38064206,59.83567701?geometries=geojson'
+	);
+};
+
+export function* getCoordsSaga() {
+	const payload = yield getCoordApi().then((response) => response.json());
+	yield put(getCoordsSuccess(payload));
+}
+
+const coordSlice = createSlice({
 	name: 'coords',
-	initialState: coordInitialState,
+	initialState,
 	reducers: {
-		getCoord: (state) => {
-			state.coord.isLoading = true;
-			state.coord.error = '';
-		},
-		getCoordSuccess: (state, action) => {
-			state.coord.isLoading = false;
-			state.coord.data = action.payload;
-		},
-		getCoordError: (state, action) => {
-			state.coord.isLoading = false;
-			state.coord.error = action.payload;
+		getCoordsSuccess: (state, action) => {
+			state.list = action.payload;
 		},
 	},
 });
 
-export default coordSlice.reducer;
+export const GET_COORD = 'coords/getCoord';
+export const getCoord = createAction(GET_COORD);
 
-export const { getCoord, getCoordSuccess, getCoordError } = coordSlice.actions;
+export const { getCoordsSuccess, reverseCoordinatesSuccess } = coordSlice.actions;
+export default coordSlice.reducer;
