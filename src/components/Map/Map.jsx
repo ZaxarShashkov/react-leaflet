@@ -18,8 +18,8 @@ const Map = () => {
 	const { list } = useSelector((state) => state.coords)
 
 	useEffect(() => {
-		dispatch(getCoord())
-	}, []);
+		dispatch(getCoord(''))
+	}, [dispatch]);
 
 
 	const customIcon = new Icon({
