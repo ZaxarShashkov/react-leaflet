@@ -8,24 +8,31 @@ import { getCoord } from './redux/CoordSlice/CoordSlice';
 function App() {
 	const [coords, setCoords] = useState('');
 	const [routes, setRoutes] = useState(null);
-	const [ok, setOk] = useState(false);
 
 	const dispatch = useDispatch();
 
-	const { list } = useSelector((state) => state.coords);
+	const { list, isLoading } = useSelector((state) => state.coords);
 
 	useEffect(() => {
 		dispatch(getCoord(coords));
-		reverseCoordinates();
 	}, [coords]);
 
+	useEffect(() => {
+		if (isLoading) {
+			console.log('reversed');
+			reverseCoordinates();
+		}
+	}, [isLoading, coords]);
+
 	const reverseCoordinates = () => {
-		const coords = list.routes?.map((item) =>
+		const coords = list.routes.map((item) =>
 			item.geometry.coordinates.map((coord) => [...coord])
 		);
-		const reversedCoords = coords?.map((item) => item.map((coord) => coord.reverse()));
+		const reversedCoords = coords.map((item) => item.map((coord) => coord.reverse()));
 		setRoutes(reversedCoords);
 	};
+
+	// xc = (x1 + x2) / 2, yc = (y1 + y2) / 2
 
 	return (
 		<div className='App'>

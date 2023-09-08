@@ -3,6 +3,7 @@ import { put, take } from 'redux-saga/effects';
 
 const initialState = {
 	list: [],
+	isLoading: false,
 };
 
 export const getCoordApi = (coords) => {
@@ -21,6 +22,7 @@ const coordSlice = createSlice({
 	reducers: {
 		getCoordsSuccess: (state, action) => {
 			state.list = action.payload;
+			state.isLoading = true;
 		},
 	},
 });
