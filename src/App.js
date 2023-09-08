@@ -20,12 +20,6 @@ function App() {
 		}
 	}, [coords, isLoading, dispatch]);
 
-	// useEffect(() => {
-	// 	if (isLoading) {
-	// 		reverseCoordinates();
-	// 	}
-	// }, [isLoading, coords]);
-
 	const reverseCoordinates = () => {
 		const coords = list.routes.map((item) =>
 			item.geometry.coordinates.map((coord) => [...coord])
