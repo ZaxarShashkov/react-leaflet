@@ -1,8 +1,5 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { MapContainer, Marker, Popup, TileLayer, Polyline } from 'react-leaflet';
-
-// import { useDispatch, useSelector } from 'react-redux';
-// import { getCoord } from '../../redux/CoordSlice/CoordSlice';
+import React, { useEffect, useState } from 'react';
+import { MapContainer, Marker, TileLayer, Polyline } from 'react-leaflet';
 
 import { Icon } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
