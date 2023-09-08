@@ -22,7 +22,7 @@ const coordSlice = createSlice({
 	reducers: {
 		getCoordsSuccess: (state, action) => {
 			state.list = action.payload;
-			state.isLoading = true;
+			state.isLoading = !state.isLoading;
 		},
 	},
 });

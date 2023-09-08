@@ -4,8 +4,8 @@ import styles from './Table.module.scss';
 const Table = ({ setCoords }) => {
 
 	const handleClick = (e) => {
-		console.log(e.currentTarget.dataset.value)
-		setCoords(e.currentTarget.dataset.value)
+		const coord = e.currentTarget.dataset.value
+		setCoords(coord)
 	}
 
 	return (

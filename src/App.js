@@ -15,14 +15,16 @@ function App() {
 
 	useEffect(() => {
 		dispatch(getCoord(coords));
-	}, [coords]);
-
-	useEffect(() => {
 		if (isLoading) {
-			console.log('reversed');
 			reverseCoordinates();
 		}
-	}, [isLoading, coords]);
+	}, [coords, isLoading, dispatch]);
+
+	// useEffect(() => {
+	// 	if (isLoading) {
+	// 		reverseCoordinates();
+	// 	}
+	// }, [isLoading, coords]);
 
 	const reverseCoordinates = () => {
 		const coords = list.routes.map((item) =>
@@ -31,8 +33,6 @@ function App() {
 		const reversedCoords = coords.map((item) => item.map((coord) => coord.reverse()));
 		setRoutes(reversedCoords);
 	};
-
-	// xc = (x1 + x2) / 2, yc = (y1 + y2) / 2
 
 	return (
 		<div className='App'>
